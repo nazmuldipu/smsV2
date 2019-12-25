@@ -7,16 +7,26 @@
             <img class="company-logo" src="assets/images/logo.png" alt="logo" />
 
             <div class="text-center my-5" style="font-size: 24px;">ACCOUNT LOGIN</div>
-            <form class="mx-5">
+            <form class="mx-5" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="form-row mb-4">
                     <div class="col p-0">
-                        <input type="text" class="form-control" placeholder="User name">
+                        <input type="text" class="form-control" placeholder="User name" formControlName="username" autocomplete="no">
+                        <small class="text-danger" *ngIf="form.controls.username.errors && form.controls.username.touched">
+                            Username required </small>
                     </div>
                     <div class="col p-0">
-                        <input type="text" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                        <small class="text-danger" *ngIf="form.controls.password.errors && form.controls.password.touched">
+                            <div [hidden]="!form.controls['password'].errors.required">
+                                Password required
+                            </div>
+                            <div [hidden]="!form.controls['password'].errors.minlength">
+                                Minimum passwor length required 6
+                            </div>
+                        </small>
                     </div>
+                    <button type="submit" class="btn btn-block btn-success py-2 mt-3">SIGN IN</button>
                 </div>
-                <button class="btn btn-block btn-success py-2">SIGN IN</button>
             </form>
             <div class="text-center my-3">Forgot your password ?
                 <a routerLink="/">Reset</a>
