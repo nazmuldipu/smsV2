@@ -29,16 +29,12 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form);
     if (this.form.valid) {
       this.errorMessage = "";
       this.loading = true;
-      console.log(this.form.value);
       this.auth.loginWithEmail(this.form.controls.username.value, this.form.controls.password.value)
         .then(data => {
-          console.log(data);
           this.userService.get(data.user.uid).subscribe(datar => {
-            console.log(data);
             this.loading = false;
             this.router.navigate(['/']);
           }, error => {

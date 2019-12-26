@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -7,14 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   show = false;
+  appUser$;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.auth.getUser$().subscribe(user => {
+      if (user) {
+        this.appUser$ = user;
+      }
+    });
   }
 
   toggleCollapse() {
     this.show = !this.show;
+  }
+
+  logout() {
+    this.appUser$ = null;
+    this.auth.logout();
+    // this.router.navigate(['/login']);
   }
 
 }

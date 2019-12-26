@@ -31,27 +31,21 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form);
     if (this.form.valid) {
       this.errorMessage = "";
       this.loading = true;
       const user = { role: "USER", ...this.form.value } as User;
-      console.log(user);
 
       this.auth.register(user.email, user.password).then((usr) => {
-        console.log(usr);
         this.userService.saveRegisteredUser(usr.user.uid, user.name, user.email, user.password)
           .then(() => {
-            // this.router.navigate(['/']);
             this.loading = false;
             this.thankyouMessage = true;
           })
           .catch((error) => {
-            console.log("USER SAVING ERROR ! ", error);
             this.errorMessage = error.message;
           });
       }).catch((error) => {
-        console.log(error);
         this.errorMessage = error.message;
       })
     } else {
