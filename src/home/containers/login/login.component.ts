@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   errorMessage: string = "";
   loading = false;
+  showPassword = false;
 
   constructor(private fb: FormBuilder, private auth: AuthService,
     private userService: UserService, private router: Router) { }
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         .then(data => {
           this.userService.get(data.user.uid).subscribe(datar => {
             this.loading = false;
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
           }, error => {
             this.loading = false;
             this.errorMessage = error.message;

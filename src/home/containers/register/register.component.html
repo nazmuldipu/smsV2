@@ -20,7 +20,7 @@
             </div>
             <loading *ngIf="loading"></loading>
 
-            <form *ngIf="!thankyouMessage && !loading" class="mx-5" [formGroup]="form" (ngSubmit)="submit()">
+            <form *ngIf="!thankyouMessage && !loading" class="mx-md-5" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="form-row mb-4">
                     <input type="text" class="form-control" placeholder="Name" formControlName="name">
                     <small class="text-danger" *ngIf="form.controls.name.errors && form.controls.name.touched">
@@ -34,7 +34,15 @@
                             Invalid email
                         </div>
                     </small>
-                    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                    <!-- <input type="password" class="form-control" placeholder="Password" formControlName="password"> -->
+                    <div class="input-group mb-1 mb-sm-0">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password">
+                        <div class="input-group-append mt-3">
+                            <button class="btn btn-outline-secondary" type="button" (click)="showPassword = !showPassword">
+                                <i class="fa fa-eye fa-2x" [ngClass]="showPassword?'fa-eye-slash':'fa-eye'"></i>
+                            </button>
+                        </div>
+                    </div>
                     <small class="text-danger" *ngIf="form.controls.password.errors && form.controls.password.touched">
                         <div [hidden]="!form.controls['password'].errors.required">
                             Password required

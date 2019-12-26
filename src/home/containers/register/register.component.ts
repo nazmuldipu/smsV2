@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   errorMessage: string = "";
   thankyouMessage = false;
   loading = false;
+  showPassword = false;
 
   constructor(private fb: FormBuilder, private auth: AuthService, private userService: UserService, private router: Router) { }
 
@@ -35,7 +36,6 @@ export class RegisterComponent implements OnInit {
       this.errorMessage = "";
       this.loading = true;
       const user = { role: "USER", ...this.form.value } as User;
-
       this.auth.register(user.email, user.password).then((usr) => {
         this.userService.saveRegisteredUser(usr.user.uid, user.name, user.email, user.password)
           .then(() => {

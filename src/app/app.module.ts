@@ -10,7 +10,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ServicesModule } from 'src/services/services.module';
 // routes
 export const ROUTES: Routes = [
-
+  {
+    path: 'dashboard',
+    loadChildren: '../dashboard/dashboard.module#DashboardModule'
+  },
   {
     path: '',
     loadChildren: '../home/home.module#HomeModule'
