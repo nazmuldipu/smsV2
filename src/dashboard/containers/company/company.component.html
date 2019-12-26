@@ -1,1 +1,12 @@
-<p>company works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <loading *ngIf="loadingData"></loading>
+            <company-list *ngIf="!loadingData" [companyList]="companyList" (edit)="onEdit($event)"></company-list>
+        </div>
+        <div class="col-md-6">
+            <loading *ngIf="sendingDate"></loading>
+            <company-form *ngIf="!sendingDate" [company]="company" (create)="onCreate($event)" (update)="onUpdate($event)" (delete)="onDelete($event)"></company-form>
+        </div>
+    </div>
+</div>

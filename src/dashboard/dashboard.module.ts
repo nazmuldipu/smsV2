@@ -7,6 +7,8 @@ import { SharedModule } from 'src/shared/shared.module';
 import { DashNavComponent } from './components/dash-nav/dash-nav.component';
 import { UsersComponent } from './containers/users/users.component';
 import { CompanyComponent } from './containers/company/company.component';
+import { CompanyListComponent } from './components/company-list/company-list.component';
+import { CompanyFormComponent } from './components/company-form/company-form.component';
 
 export const ROUTES: Routes = [
   {
@@ -21,7 +23,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent],
+  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent],
   imports: [
     SharedModule, RouterModule.forChild(ROUTES)
   ]
