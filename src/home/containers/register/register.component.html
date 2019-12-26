@@ -1,23 +1,34 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6 mt-5">
+        <div class="col-md-6 mt-5 d-none d-md-block">
             <img src="assets/images/sms_image.jpg" alt="logo" style="width: 100%;" />
         </div>
         <div class="col-md-6 mt-5">
             <img class="company-logo" src="assets/images/logo.png" alt="logo" />
 
-            <div class="text-center my-4" style="font-size: 24px;">ACCOUNT LOGIN</div>
-            <form class="mx-5" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="text-center my-4" style="font-size: 24px;">REGISTRATION</div>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage.length > 0">
+                {{errorMessage}}
+            </div>
+            <div *ngIf="thankyouMessage">
+                <i class="fa fa-thumbs-o-up"></i> Thank you for registration with UNOLO Technology Limited bulk SMS. You can now
+                <a routerLink="/login">
+                    <strong>Login</strong>
+                </a> at our login page.
+            </div>
+            <loading *ngIf="loading"></loading>
+
+            <form *ngIf="!thankyouMessage && !loading" class="mx-5" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="form-row mb-4">
                     <input type="text" class="form-control" placeholder="Name" formControlName="name">
                     <small class="text-danger" *ngIf="form.controls.name.errors && form.controls.name.touched">
                         Name required </small>
-                    <input type="text" class="form-control" placeholder="Email" formControlName="username" />
-                    <small class="text-danger" *ngIf=" form.controls.username.errors && form.controls.username.touched">
-                        <div [hidden]="!form.controls['username'].errors.required">
+                    <input type="text" class="form-control" placeholder="Email" formControlName="email" />
+                    <small class="text-danger" *ngIf=" form.controls.email.errors && form.controls.email.touched">
+                        <div [hidden]="!form.controls['email'].errors.required">
                             Email required
                         </div>
-                        <div [hidden]="!form.controls['username'].errors.email">
+                        <div [hidden]="!form.controls['email'].errors.email">
                             Invalid email
                         </div>
                     </small>
@@ -34,7 +45,7 @@
                 <button class="btn btn-block btn-success py-2">SIGN IN</button>
             </form>
 
-            <div class="text-center my-3">Already registered?
+            <div *ngIf="!thankyouMessage" class="text-center my-3">Already registered?
                 <a routerLink="/login">
                     <strong>Login</strong>
                 </a>
