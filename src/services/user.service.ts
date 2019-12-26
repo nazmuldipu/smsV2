@@ -20,4 +20,8 @@ export class UserService {
       roles: 'USER'
     });
   }
+
+  get(uid) {
+    return this.afs.doc('users/' + uid).valueChanges();
+  }
 }

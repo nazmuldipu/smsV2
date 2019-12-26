@@ -12,4 +12,8 @@ export class AuthService {
     console.log(email, password);
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
+
+  loginWithEmail(email, password) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
 }

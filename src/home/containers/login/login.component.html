@@ -6,32 +6,32 @@
         <div class="col-md-6 mt-5">
             <img class="company-logo" src="assets/images/logo.png" alt="logo" />
 
-            <div class="text-center my-5" style="font-size: 24px;">ACCOUNT LOGIN</div>
-            <form class="mx-5" [formGroup]="form" (ngSubmit)="submit()">
-                <div class="form-row mb-4">
-                    <div class="col p-0">
-                        <input type="text" class="form-control" placeholder="User name" formControlName="username" autocomplete="no">
-                        <small class="text-danger" *ngIf="form.controls.username.errors && form.controls.username.touched">
-                            Username required </small>
+            <div class="text-center my-4" style="font-size: 24px;">ACCOUNT LOGIN</div>
+
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage.length > 0">
+                {{errorMessage}}
+            </div>
+            <loading *ngIf="loading"></loading>
+
+            <form *ngIf="!loading" class="mx-5" [formGroup]="form" (ngSubmit)="submit()">
+                <input type="text" class="form-control" placeholder="User name" formControlName="username" autocomplete="no">
+                <small class="text-danger" *ngIf="form.controls.username.errors && form.controls.username.touched">
+                    Username required </small>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <small class="text-danger" *ngIf="form.controls.password.errors && form.controls.password.touched">
+                    <div [hidden]="!form.controls['password'].errors.required">
+                        Password required
                     </div>
-                    <div class="col p-0">
-                        <input type="password" class="form-control" placeholder="Password" formControlName="password">
-                        <small class="text-danger" *ngIf="form.controls.password.errors && form.controls.password.touched">
-                            <div [hidden]="!form.controls['password'].errors.required">
-                                Password required
-                            </div>
-                            <div [hidden]="!form.controls['password'].errors.minlength">
-                                Minimum passwor length required 6
-                            </div>
-                        </small>
+                    <div [hidden]="!form.controls['password'].errors.minlength">
+                        Minimum passwor length required 6
                     </div>
-                    <button type="submit" class="btn btn-block btn-success py-2 mt-3">SIGN IN</button>
-                </div>
+                </small>
+                <button type="submit" class="btn btn-block btn-success py-2 mt-3">SIGN IN</button>
             </form>
-            <div class="text-center my-3">Forgot your password ?
+            <div *ngIf="!loading" class="text-center my-3">Forgot your password ?
                 <a routerLink="/">Reset</a>
             </div>
-            <div class="text-center my-3">Not register yet?
+            <div *ngIf="!loading" class="text-center my-3">Not register yet?
                 <a routerLink="/register">
                     <strong>Register</strong>
                 </a>
