@@ -19,12 +19,10 @@ export class DashNavComponent implements OnInit {
 
   async ngOnInit() {
     await this.auth.getUser$().pipe(take(1)).subscribe(user => {
-      console.log(user);
       if (user) {
         this.appUser$ = user;
         this.userService.get(user.uid).pipe(take(1))
           .subscribe(data => {
-            console.log(data);
             this.appUser = data;
             if (this.appUser.companyId) {
               localStorage.setItem('companyId', this.appUser.companyId);
@@ -43,6 +41,10 @@ export class DashNavComponent implements OnInit {
 
   hasAdminRole(): boolean {
     return this.roles.includes('ADMIN');
+  }
+
+  hasCompanyRole(): boolean {
+    return this.roles.includes('COMPANY') && !!this.appUser.companyId;
   }
 
   logout() {

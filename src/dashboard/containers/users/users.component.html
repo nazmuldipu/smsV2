@@ -1,1 +1,16 @@
-<p>users works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <loading *ngIf="loadingData"></loading>
+            <user-list *ngIf="!loadingData" [userList]="userList" (edit)="onEdit($event)"></user-list>
+        </div>
+        <div class="col-md-6">
+            <loading *ngIf="sendingData"></loading>
+            <div class="alert alert-danger" *ngIf="errorMessage.length>0">
+                {{errorMessage}}
+            </div>
+            <user-form *ngIf="!sendingData" [companyList]="companyList" [user]="user" (create)="onCreate($event)" (update)="onUpdate($event)"
+                (delete)="onDelete($event)"></user-form>
+        </div>
+    </div>
+</div>

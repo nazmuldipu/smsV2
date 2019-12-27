@@ -2,27 +2,25 @@
     <div class="col-12">
         <div class="text-center">
             <h5 class="h3 mb-3 font-weight-normal">
-                <strong> COMPANY LIST</strong>
+                <strong> USER LIST</strong>
             </h5>
         </div>
         <table class="table border table-responsive-sm">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Phone</th>
-                    <th>Guest. #</th>
-                    <th>SMS #</th>
+                    <th>Email</th>
+                    <th>Roles</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let com of companyList">
-                    <td>{{com.companyName}}</td>
-                    <td>{{com.telephone}}</td>
-                    <td>{{com.maximumNumberOfGuest}}</td>
-                    <td>{{com.smsQuota}}</td>
+                <tr *ngFor="let usr of userList">
+                    <td>{{usr.name}}</td>
+                    <td>{{usr.email}}</td>
+                    <td>{{usr.role}}</td>
                     <td>
-                        <a class="btn btn-sm btn-warning raised" (click)="editCompany(com.id)">Edit</a>
+                        <a class="btn btn-sm btn-warning raised" (click)="editUser(usr.id)">Edit</a>
                     </td>
                 </tr>
             </tbody>

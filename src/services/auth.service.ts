@@ -25,6 +25,10 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
+  resetPassword(email: string): Promise<void> {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+
   logout() {
     this.afAuth.auth.signOut()
       .then(data => {

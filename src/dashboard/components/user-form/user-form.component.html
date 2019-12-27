@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <h5 class="h3 mb-3 font-weight-normal">
+                <strong>{{ exists ? 'UPDATE' : 'ADD' }} USER </strong>
+            </h5>
+            <div class="alert alert-danger" *ngIf="errorMessage.length>0">
+                {{errorMessage}}
+            </div>
+        </div>
+
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" (mouseleave)="mouseoverShifting = false">
+            <!-- <label for="companyId">Company *</label> -->
+            <select class="form-control" id="companyId" formControlName="companyId">
+                <option value=""> Select a company </option>
+                <option *ngFor="let com of companyList" [value]="com.id"> {{com.companyName}} </option>
+            </select>
+            <small class="text-danger" *ngIf=" form.controls.companyId.errors?.required && form.controls.companyId.dirty ">
+                Company Id required
+            </small>
+
+            <input type="text" class="form-control" placeholder="Name *" formControlName="name">
+            <small class="text-danger" *ngIf="form.controls.name.errors && form.controls.name.touched">
+                Name required
+            </small>
+            <input type="text" class="form-control" placeholder="Email *" formControlName="email" [readonly]="exists" />
+            <small class="text-danger" *ngIf=" form.controls.email.errors && form.controls.email.touched">
+                <div [hidden]="!form.controls['email'].errors.required">
+                    Email required
+                </div>
+                <div [hidden]="!form.controls['email'].errors.email">
+                    Invalid email
+                </div>
+            </small>
+
+            <input type="text" class="form-control" placeholder="Phone *" maxlength="11" formControlName="phone">
+            <small class="text-danger" *ngIf=" form.controls.phone.errors && form.controls.phone.touched ">
+                <div [hidden]="!form.controls['phone'].errors.required"> Phone number required </div>
+                <div [hidden]="!form.controls['phone'].errors.pattern"> Phone number format 01934953023 </div>
+            </small>
+
+            <!-- <label for="role">Role *</label> -->
+            <select class="form-control" id="role" formControlName="role">
+                <option value=""> Select a role </option>
+                <option *ngFor="let item of (roles | keyvalue)" [value]="item.key">
+                    {{ item.value }}
+                </option>
+            </select>
+            <small class="text-danger" *ngIf=" form.controls.role.errors?.required && form.controls.role.dirty ">
+                Role required
+            </small>
+
+            <div class="input-group mb-1 mb-sm-0">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password"
+                    [readonly]="exists">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary px-2" type="button" (click)="showPassword = !showPassword" style="margin-bottom: 10px;">
+                        <i class="fa fa-eye" [ngClass]="showPassword?'fa-eye-slash':'fa-eye'"></i>
+                    </button>
+                </div>
+            </div>
+            <small class="text-danger" *ngIf="form.controls.password.errors && form.controls.password.touched">
+                <div [hidden]="!form.controls['password'].errors.required">
+                    Password required
+                </div>
+                <div [hidden]="!form.controls['password'].errors.minlength">
+                    Minimum passwor length required 6
+                </div>
+            </small>
+
+            <div *ngIf="mouseoverShifting" class="text-danger">
+                {{ getFormValidationErrors() }}
+            </div>
+
+            <div class="d-flex flex-row-reverse bd-highlight my-2 mb-5">
+                <span (mouseenter)="mouseoverShifting = true">
+                    <button type="submit" class="btn btn-warning mx-1 shadow-sm" [ngClass]="{
+                                  disabled: form.invalid,
+                                  'btn-warning': exists,
+                                  'btn-success': !exists
+                                }">
+                        {{ exists ? 'Update' : 'Create' }} User
+                    </button>
+                </span>
+                <button type="button" class="btn btn-sm btn-light mx-1 shadow-sm" (click)="clear()">Clear</button>
+                <button type="button" class="btn btn-sm btn-danger mx-1 shadow-sm" *ngIf="user && user.id" (click)="onDelete(user.id)">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>

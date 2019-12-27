@@ -9,6 +9,8 @@ import { UsersComponent } from './containers/users/users.component';
 import { CompanyComponent } from './containers/company/company.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { CompanyFormComponent } from './components/company-form/company-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 export const ROUTES: Routes = [
   {
@@ -23,7 +25,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent],
+  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent, UserListComponent, UserFormComponent],
   imports: [
     SharedModule, RouterModule.forChild(ROUTES)
   ]
