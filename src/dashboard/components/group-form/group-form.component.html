@@ -1,0 +1,52 @@
+<div class="row pl-4">
+    <div class="col-12 shadow-sm">
+        <div class="text-center">
+            <h5 class="h3 mb-3 font-weight-normal">
+                <strong>ADD GROUP </strong>
+            </h5>
+            <div class="alert alert-danger" *ngIf="errorMessage.length>0">
+                {{errorMessage}}
+            </div>
+        </div>
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" (mouseleave)="mouseoverShifting = false">
+            <div class="form-group">
+                <label for="serialNo">Serial No*</label>
+                <input type="text" class="form-control" id="serialNo" placeholder="Serial No" formControlName="serialNo">
+                <small class="text-danger" *ngIf="form.controls.serialNo.errors && form.controls.serialNo.touched">
+                    Serial No required
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="serialNo">Group Code No*</label>
+                <input type="text" class="form-control" id="groupCode" placeholder="Group Code No" formControlName="groupCode">
+                <small class="text-danger" *ngIf="form.controls.groupCode.errors && form.controls.groupCode.touched">
+                    Group Code No required
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="serialNo">Institution*</label>
+                <input type="text" class="form-control" id="institution" placeholder="Institution" formControlName="institution">
+                <small class="text-danger" *ngIf="form.controls.institution.errors && form.controls.institution.touched">
+                    Institution required
+                </small>
+            </div>
+            <div *ngIf="mouseoverShifting" class="text-danger">
+                {{ getFormValidationErrors() }}
+            </div>
+
+            <div class="d-flex flex-row-reverse bd-highlight my-2 mb-5">
+                <span (mouseenter)="mouseoverShifting = true">
+                    <button type="submit" class="btn btn-warning mx-1 shadow-sm" [ngClass]="{
+                              disabled: form.invalid,
+                              'btn-warning': exists,
+                              'btn-success': !exists
+                            }">
+                        {{ exists ? 'Update' : 'Create' }} Group
+                    </button>
+                </span>
+                <button type="button" class="btn btn-sm btn-light mx-1 shadow-sm" (click)="clear()">Clear</button>
+                <button type="button" class="btn btn-sm btn-danger mx-1 shadow-sm" *ngIf="group && group.id" (click)="onDelete(group.id)">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <dir class="col-md-6">
+            <loading *ngIf="loadingData"></loading>
+            <group-list *ngIf="!loadingData" [groupList]="groupList" (edit)="onEdit($event)"></group-list>
+        </dir>
+        <dir class="col-md-6">
+            <loading *ngIf="sendingData"></loading>
+            <group-form *ngIf="!sendingData" [group]="group" (create)="onCreate($event)" (update)="onUpdate($event)" (delete)="onDelete($event)"></group-form>
+        </dir>
+    </div>
+</div>

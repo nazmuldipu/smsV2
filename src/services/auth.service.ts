@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs/internal/Observable';
+import { User } from 'src/shared/models/user.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,10 @@ import { Observable } from 'rxjs/internal/Observable';
 export class AuthService {
 
   user$: Observable<firebase.User>;
+
+  public _userSource = new BehaviorSubject<User>(new User());
+  currentUser$ = this._userSource.asObservable();
+  currentUser: User;
 
   constructor(public afAuth: AngularFireAuth) {
     this.user$ = afAuth.authState;

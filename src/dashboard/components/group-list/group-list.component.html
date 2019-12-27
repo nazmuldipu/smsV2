@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-12 shadow-sm">
+        <div class="text-center">
+            <h5 class="h3 mb-3 font-weight-normal">
+                <strong> GROUP LIST</strong>
+            </h5>
+        </div>
+        <table class="table border table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>Sl.</th>
+                    <th>Group code</th>
+                    <th>Institute</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let com of groupList">
+                    <td>{{com.serialNo}}</td>
+                    <td>{{com.groupCode}}</td>
+                    <td>{{com.institution}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning raised" (click)="editCompany(com.id)">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
