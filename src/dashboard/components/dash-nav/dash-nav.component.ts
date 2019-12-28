@@ -3,6 +3,8 @@ import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 import { take } from 'rxjs/operators';
+import { GroupService } from 'src/services/group.service';
+import { PeopleService } from 'src/services/people.service';
 
 @Component({
   selector: 'dash-nav',
@@ -15,7 +17,8 @@ export class DashNavComponent implements OnInit {
   appUser;
   roles = [];
 
-  constructor(private auth: AuthService, private userService: UserService, private router: Router) { }
+  constructor(private auth: AuthService, private userService: UserService,
+    private groupService: GroupService, private router: Router, private peopleService: PeopleService) { }
 
   async ngOnInit() {
     await this.auth.getUser$().pipe(take(1)).subscribe(user => {
@@ -27,6 +30,8 @@ export class DashNavComponent implements OnInit {
             this.auth._userSource.next(this.appUser);
             if (this.appUser.companyId) {
               localStorage.setItem('companyId', this.appUser.companyId);
+              this.groupService.getAndStoreAll(this.appUser.companyId);
+              this.peopleService.getAndStoreAll(this.appUser.companyId);
             } else {
               localStorage.removeItem('companyId');
             }

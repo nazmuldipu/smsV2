@@ -26,16 +26,22 @@ export class GroupsComponent implements OnInit {
         this.getAllGroups(this.companyId);
       }
     });
-
   }
 
   async getAllGroups(companyId) {
     this.loadingData = true;
-    await this.groupService.getAll(companyId)
-      .subscribe(data => {
+    await this.groupService.gropus$.subscribe(data => {
+      if (data.length) {
         this.groupList = data;
         this.loadingData = false;
-      });
+      } else {
+        this.groupService.getAll(companyId)
+          .subscribe(data => {
+            this.groupList = data;
+            this.loadingData = false;
+          });
+      }
+    })
   }
 
   onEdit(id) {
@@ -51,7 +57,7 @@ export class GroupsComponent implements OnInit {
       })
       .catch((error) => {
         this.sendingData = false;
-        this.errorMessage = "Company SAVING ERROR ! ", error;
+        this.errorMessage = "Group SAVING ERROR ! ", error;
       });
     this.clear();
   }
@@ -65,7 +71,7 @@ export class GroupsComponent implements OnInit {
       })
       .catch((error) => {
         this.sendingData = false;
-        this.errorMessage = "Company Updating ERROR ! ", error;
+        this.errorMessage = "Group Updating ERROR ! ", error;
       });
     this.clear();
   }
@@ -79,7 +85,7 @@ export class GroupsComponent implements OnInit {
         })
         .catch((error) => {
           this.sendingData = false;
-          this.errorMessage = "Company Deleting ERROR ! ", error;
+          this.errorMessage = "Group Deleting ERROR ! ", error;
         });
       this.clear();
     }

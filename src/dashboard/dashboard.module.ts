@@ -14,6 +14,9 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { GroupsComponent } from './containers/groups/groups.component';
 import { GroupListComponent } from './components/group-list/group-list.component';
 import { GroupFormComponent } from './components/group-form/group-form.component';
+import { PeoplesComponent } from './containers/peoples/peoples.component';
+import { PeopleListComponent } from './components/people-list/people-list.component';
+import { PeopleFormComponent } from './components/people-form/people-form.component';
 
 export const ROUTES: Routes = [
   {
@@ -21,6 +24,7 @@ export const ROUTES: Routes = [
     component: DashboardComponent,
     children: [
       { path: 'users', component: UsersComponent },
+      { path: 'peoples', component: PeoplesComponent },
       { path: 'company', component: CompanyComponent },
       { path: 'groups', component: GroupsComponent },
       { path: '', component: IndexComponent },
@@ -29,7 +33,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent, UserListComponent, UserFormComponent, GroupsComponent, GroupListComponent, GroupFormComponent],
+  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent, UserListComponent, UserFormComponent, GroupsComponent, GroupListComponent, GroupFormComponent, PeoplesComponent, PeopleListComponent, PeopleFormComponent],
   imports: [
     SharedModule, RouterModule.forChild(ROUTES)
   ]

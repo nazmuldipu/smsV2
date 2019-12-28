@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="groupId">Group *</label>
+                <select class="form-control" id="groupId" #group (change)="onGroupChanged(group.value)">
+                    <option value=""> Select a group </option>
+                    <option *ngFor="let com of groupList" [value]="com.id" [selected]="com.id==group.id">{{com.groupCode}}-{{com.institution}} </option>
+                </select>
+            </div>
+
+            <people-list [peopleList]="peopleList" (edit)="onEdit($event)"></people-list>
+        </div>
+        <div class="col-md-6">
+            <loading *ngIf="sendingData"></loading>
+            <people-form *ngIf="!sendingData" [people]="people" [groupe]="groupe" [groupList]="groupList" (create)="onCreate($event)"
+                (update)="onUpdate($event)" (delete)="onDelete($event)">
+            </people-form>
+        </div>
+    </div>
+</div>

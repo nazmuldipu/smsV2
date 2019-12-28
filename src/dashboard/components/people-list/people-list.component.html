@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-12 shadow-sm">
+        <div class="text-center">
+            <h5 class="h3 mb-3 font-weight-normal">
+                <strong> PEOPLE LIST</strong>
+            </h5>
+        </div>
+        <table class="table border table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>Sl.</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pep of peopleList">
+                    <td>{{pep.serialNo}}</td>
+                    <td>{{pep.name}}</td>
+                    <td>{{pep.phone}}</td>
+                    <td>{{pep.email}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning raised" (click)="onEdit(pep.id)">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
