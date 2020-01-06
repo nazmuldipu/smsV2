@@ -32,7 +32,6 @@ export class PeopleService {
           const id = a.payload.doc.id;
           return { id, ...data };
         }))).subscribe(data => {
-          console.log(data);
           this._peopleSource.next(data);
         });
   }

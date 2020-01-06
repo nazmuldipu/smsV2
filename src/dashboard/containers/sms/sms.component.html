@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-light active" [ngClass]="{ active: tab == 'All' }" (click)="tab = 'All'">All</button>
+                <button type="button" class="btn btn-light" [ngClass]="{ active: tab == 'Group' }" (click)="tab = 'Group'">Group</button>
+                <button type="button" class="btn btn-light" [ngClass]="{ active: tab == 'Manual' }" (click)="tab = 'Manual'">Manual</button>
+                <button type="button" class="btn btn-light" [ngClass]="{ active: tab == 'History' }" (click)="tab = 'History'">History</button>
+            </div>
+        </div>
+    </div>
+
+    <ng-template [ngIf]="tab == 'All'">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 shadow-sm">
+                <sms-all-people-eng (sms)="onSms($event)"></sms-all-people-eng>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template [ngIf]="tab=='Group'">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 shadow-sm">
+                <sms-group-people-eng [groupList]="groupList" (sms)="onSms($event)"></sms-group-people-eng>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template [ngIf]="tab=='Manual'">
+        Manual people sms
+    </ng-template>
+
+    <ng-template [ngIf]="tab=='History'">
+        sms History
+    </ng-template>
+</div>

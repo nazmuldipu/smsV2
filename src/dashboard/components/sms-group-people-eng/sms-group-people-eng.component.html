@@ -1,0 +1,20 @@
+<h3 class="text-center">SMS to Group</h3>
+{{form.value | json}}
+<form [formGroup]="form" (ngSubmit)="submit()" (mouseleave)="mouseoverShifting = false" class="py-3">
+    <div class="form-group" *ngIf="groupList.length">
+        <label for="groupId">Group *</label>
+        <select class="form-control" id="groupId" name="groupId" formControlName="groupId">
+            <option value=""> Select a group </option>
+            <option *ngFor="let com of groupList" [value]="com.id">{{com.groupCode}}-{{com.institution}} </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="message">Type your message here *</label>
+        <textarea type="text" class="form-control" id="message" name="message" formControlName="message" (keyup)="nameKeyup()" maxlength="160"
+            rows="4"> </textarea>
+        <small class="form-text pull-right">{{form.controls.message.value?.length}}/160</small>
+    </div>
+    <button class="btn btn-success " [disabled]="form.invalid">
+        <i class="fa fa-paper-plane"></i> Send
+    </button>
+</form>
