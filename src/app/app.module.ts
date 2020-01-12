@@ -8,6 +8,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ServicesModule } from 'src/services/services.module';
+import { HttpClientModule } from '@angular/common/http';
+
 // routes
 export const ROUTES: Routes = [
   {
@@ -27,6 +29,7 @@ export const ROUTES: Routes = [
   imports: [
     BrowserModule,
     ServicesModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

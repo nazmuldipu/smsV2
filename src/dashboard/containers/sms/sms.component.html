@@ -30,7 +30,12 @@
     </ng-template>
 
     <ng-template [ngIf]="tab=='Manual'">
-        Manual people sms
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 shadow-sm">
+                <sms-manual-eng (sms)="onSms($event)"></sms-manual-eng>
+            </div>
+        </div>
     </ng-template>
 
     <ng-template [ngIf]="tab=='History'">

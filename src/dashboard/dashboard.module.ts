@@ -20,6 +20,7 @@ import { PeopleFormComponent } from './components/people-form/people-form.compon
 import { SmsComponent } from './containers/sms/sms.component';
 import { SmsAllPeopleEngComponent } from './components/sms-all-people-eng/sms-all-people-eng.component';
 import { SmsGroupPeopleEngComponent } from './components/sms-group-people-eng/sms-group-people-eng.component';
+import { SmsManualEngComponent } from './components/sms-manual-eng/sms-manual-eng.component';
 
 export const ROUTES: Routes = [
   {
@@ -37,7 +38,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent, UserListComponent, UserFormComponent, GroupsComponent, GroupListComponent, GroupFormComponent, PeoplesComponent, PeopleListComponent, PeopleFormComponent, SmsComponent, SmsAllPeopleEngComponent, SmsGroupPeopleEngComponent],
+  declarations: [DashboardComponent, IndexComponent, DashNavComponent, UsersComponent, CompanyComponent, CompanyListComponent, CompanyFormComponent, UserListComponent, UserFormComponent, GroupsComponent, GroupListComponent, GroupFormComponent, PeoplesComponent, PeopleListComponent, PeopleFormComponent, SmsComponent, SmsAllPeopleEngComponent, SmsGroupPeopleEngComponent, SmsManualEngComponent],
   imports: [
     SharedModule, RouterModule.forChild(ROUTES)
   ]

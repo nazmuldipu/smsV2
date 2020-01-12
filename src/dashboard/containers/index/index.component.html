@@ -1,1 +1,70 @@
-<p>index works!</p>
+<div class="container pt-2">
+    <div class="row my-2">
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3" *ngIf="isAdmin">
+            <div class="info-box hover-expand-effect">
+                <div class="icon bg-deep-purple">
+                    <i class="fa fa-building"></i>
+                </div>
+                <div class="content">
+                    <div class="text">COMPANIES</div>
+                    <div class="number"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3" *ngIf="isCompany">
+            <div class="info-box hover-expand-effect">
+                <div class="icon bg-deep-purple">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="content">
+                    <div class="text">GROUPS</div>
+                    <div class="number">{{gropus.length}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3" *ngIf="isCompany">
+            <div class="info-box hover-expand-effect">
+                <div class="icon bg-green">
+                    <i class="fa fa-graduation-cap"></i>
+                </div>
+                <div class="content">
+                    <div class="text">PEOPLES</div>
+                    <div class="number">{{peoples.length}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3" *ngIf="isCompany">
+            <div class="info-box hover-expand-effect">
+                <div class="icon bg-teal">
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="content">
+                    <div class="text">SMS REMAIN</div>
+                    <div class="number">{{company?.smsQuota}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="shadow-sm table table-striped table-hover border">
+                <thead>
+                    <tr>
+                        <th>Group</th>
+                        <th class="text-right">No. of People</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let group of gropus">
+                        <td>{{group.institution}}</td>
+                        <td class="text-right">{{getNumberOfPeopleInGroup(group.id)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>

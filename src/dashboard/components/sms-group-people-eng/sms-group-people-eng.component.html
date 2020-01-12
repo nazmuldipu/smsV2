@@ -1,5 +1,5 @@
 <h3 class="text-center">SMS to Group</h3>
-{{form.value | json}}
+
 <form [formGroup]="form" (ngSubmit)="submit()" (mouseleave)="mouseoverShifting = false" class="py-3">
     <div class="form-group" *ngIf="groupList.length">
         <label for="groupId">Group *</label>

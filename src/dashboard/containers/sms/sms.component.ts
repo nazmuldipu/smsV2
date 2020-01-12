@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/shared/models/group.model';
 import { GroupService } from 'src/services/group.service';
+import { SMS } from '../../../shared/models/sms.model';
+import { SmsService } from 'src/services/sms.service';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-sms',
@@ -8,14 +11,21 @@ import { GroupService } from 'src/services/group.service';
   styleUrls: ['./sms.component.scss']
 })
 export class SmsComponent implements OnInit {
-  // tab = 'All';
-  tab = 'Group';
+  tab = 'All';
+  companyId;
+  userId;
   groupList: Group[] = [];
 
-  constructor(private groupService: GroupService) { }
+  constructor(private groupService: GroupService, private smsService: SmsService, private auth: AuthService) { }
 
   ngOnInit() {
     this.getAllGroups();
+    this.auth.currentUser$.subscribe(data => {
+      if (data.id) {
+        this.userId = data.id;
+        this.companyId = data.companyId;
+      }
+    })
   }
 
   async getAllGroups() {
@@ -27,13 +37,18 @@ export class SmsComponent implements OnInit {
   onSms(sms) {
     switch (this.tab) {
       case 'All':
-        console.log("ALL");
-        console.log(sms.message);
+        const value1 = new SMS(null, new Date(), this.companyId, this.userId, 'phone', sms.message, this.tab);
+
+        sms.userId = this.userId;
+        this.smsService.sendSMStoAll(value1);
         break;
       case 'Group':
-        console.log('Group');
-        console.log(sms.groupId);
-        console.log(sms.message);
+        const value2 = new SMS(null, new Date(), this.companyId, this.userId, 'phone', sms.message, this.tab);
+        this.smsService.sendGroupSMS(value2, sms.groupId);
+        break;
+      case 'Manual':
+        const value3 = new SMS(null, new Date(), this.companyId, this.userId, sms.phone, sms.message, this.tab);
+        console.log(value3);
         break;
     }
   }
