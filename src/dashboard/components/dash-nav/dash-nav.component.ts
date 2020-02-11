@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
-import { UserService } from 'src/services/user.service';
 import { take } from 'rxjs/operators';
+import { AuthService } from 'src/services/auth.service';
+import { CompanyService } from 'src/services/company.service';
 import { GroupService } from 'src/services/group.service';
 import { PeopleService } from 'src/services/people.service';
+import { UserService } from 'src/services/user.service';
+
 
 @Component({
   selector: 'dash-nav',
@@ -17,8 +19,12 @@ export class DashNavComponent implements OnInit {
   appUser;
   roles = [];
 
-  constructor(private auth: AuthService, private userService: UserService,
-    private groupService: GroupService, private router: Router, private peopleService: PeopleService) { }
+  constructor(private auth: AuthService,
+    private userService: UserService,
+    private companyService: CompanyService,
+    private groupService: GroupService,
+    private peopleService: PeopleService,
+    private router: Router) { }
 
   async ngOnInit() {
     await this.auth.getUser$().pipe(take(1)).subscribe(user => {
@@ -28,10 +34,13 @@ export class DashNavComponent implements OnInit {
           .subscribe(data => {
             this.appUser = data;
             this.auth._userSource.next(this.appUser);
+            let companyId = this.appUser.companyId;
             if (this.appUser.companyId) {
-              localStorage.setItem('companyId', this.appUser.companyId);
-              this.groupService.getAndStoreAll(this.appUser.companyId);
-              this.peopleService.getAndStoreAll(this.appUser.companyId);
+              localStorage.setItem('companyId', companyId);
+              this.groupService.getAndStoreAll(companyId);
+              this.peopleService.getAndStoreAll(companyId);
+              this.companyService.getAndStore(companyId);
+
             } else {
               localStorage.removeItem('companyId');
             }

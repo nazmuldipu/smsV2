@@ -22,7 +22,7 @@ export class PeoplesComponent implements OnInit {
   errorMessage = "";
 
   constructor(private auth: AuthService,
-    private peopleSevice: PeopleService, private groupService: GroupService) { }
+    private peopleService: PeopleService, private groupService: GroupService) { }
 
   ngOnInit() {
     this.auth.currentUser$.subscribe(data => {
@@ -49,7 +49,7 @@ export class PeoplesComponent implements OnInit {
   }
 
   async getGroupPeople(groupId) {
-    this.peopleSevice.peoples$.subscribe(data => {
+    this.peopleService.peoples$.subscribe(data => {
       this.peopleList = data.filter(p => p.groupId == groupId);
     })
   }
@@ -57,7 +57,7 @@ export class PeoplesComponent implements OnInit {
   async onCreate(event) {
     this.sendingData = true;
     const value = { companyId: this.companyId, ...event }
-    await this.peopleSevice.create(value)
+    await this.peopleService.create(value)
       .then(() => {
         this.sendingData = false;
       })
@@ -70,7 +70,7 @@ export class PeoplesComponent implements OnInit {
   async onUpdate(event) {
     this.sendingData = true;
     const value = { companyId: this.companyId, ...event }
-    await this.peopleSevice.update(this.people.id, value)
+    await this.peopleService.update(this.people.id, value)
       .then(() => {
         this.sendingData = false;
       })
@@ -83,7 +83,7 @@ export class PeoplesComponent implements OnInit {
   onDelete(id) {
     this.sendingData = true;
     if (confirm('Are you sure to delete')) {
-      this.peopleSevice.delete(id)
+      this.peopleService.delete(id)
         .then(() => {
           this.sendingData = false;
         })

@@ -6,8 +6,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SmsApiService {
+  // username: string = 'nazmulalam';
+  // password: string = 'rubeln123';
+  // senderId: string = '8801912239643';
+
   // proxy = 'https://api.hotelswave.com/proxy/';
-  proxy = 'http://localhost:8080/proxy/';
+  proxy = 'http://192.168.0.10:8080/proxy/';
 
   constructor(private http: HttpClient) { }
 

@@ -48,7 +48,7 @@ export class SmsComponent implements OnInit {
         break;
       case 'Manual':
         const value3 = new SMS(null, new Date(), this.companyId, this.userId, sms.phone, sms.message, this.tab);
-        console.log(value3);
+        this.smsService.sendManualSMS(value3);
         break;
     }
   }
